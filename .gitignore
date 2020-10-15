@@ -8,7 +8,9 @@ venv/
 data/
 ./data
 
+.ipynb_checkpoints
 
+./.ipynb_checkpoints
 
 # Random files
 *~
