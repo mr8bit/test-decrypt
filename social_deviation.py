@@ -1,4 +1,4 @@
-from data_keys import gender_keys_test, normal_datasets
+from .data_keys import gender_keys_test, normal_datasets
 
 
 class SocialDeviation():
@@ -261,10 +261,8 @@ class SocialDeviation():
         self.gender = gender
         check_keys = []
         if gender == 'f':
-            print('female')
             check_keys = self.gender_keys[0]
         if gender == 'm':
-            print('male')
             check_keys = self.gender_keys[1]
 
         for index, check in enumerate(check_keys):
@@ -281,4 +279,4 @@ class SocialDeviation():
             S = normal_datasets[index][1]
             T = 10 * (X - M) / S + 50
             self.result.append(T)
-        self.correction_result()
+        #self.correction_result()

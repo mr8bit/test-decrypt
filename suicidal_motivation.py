@@ -1,4 +1,4 @@
-from data_keys import suicidal_keys
+from .data_keys import suicidal_keys
 
 
 class SuicidalMotivation():

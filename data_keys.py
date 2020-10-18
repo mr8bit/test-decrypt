@@ -1,4 +1,4 @@
-from data_keys_male import male
+from .data_keys_male import male
 
 # Шкала установки на социально-желательные ответы
 check_1 = [
