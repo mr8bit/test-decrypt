@@ -29,6 +29,7 @@ class SocialDeviation():
         :return:
         """
         decryption = ''
+        normal = True
         if self.result[0] < 50:
             decryption = "Испытуемый не склонен скрывать собственные нормы и ценности, корректировать свои ответы в направлении социальной желательности."
         if 50 < self.result[0] <= 60:
@@ -36,14 +37,17 @@ class SocialDeviation():
         if 60 < self.result[0] <= 70:
             decryption = "Cвидетельствует о тенденции испытуемого демонстрировать строгое соблюдение даже малозначительных социальных норм, умышленном стремлении показать себя в лучшем свете, о настороженности по отношению к ситуации обследования. "
         if 70 < self.result[0]:
+            normal = False
             decryption = "Говорят о высокой настороженности испытуемого по отношению к психодиагностической ситуации и о сомнительной достоверности результатов по основным шкалам. "
         if self.gender == 'm' and self.raw_result[0] >= 11:
+            normal = False
             decryption = "Cвидетельствуют о недостоверности результатов по основным шкалам. "
         return {
             'Scale': 'Шкала установки на социальную желательность',
             'ScaleValue': self.result[0],
             'RawValue': self.raw_result[0],
-            'Decryption': decryption
+            'Decryption': decryption,
+            'MoreNormal':normal
         }
 
     def humanize_second_scale(self):
@@ -56,17 +60,22 @@ class SocialDeviation():
         :return:
         """
         decryption = ''
+        normal = True
         if self.result[1] < 50:
             decryption = "свидетельствуют о конформных установках испытуемого, склонности следовать стереотипам и общепринятым нормам поведения"
         if 50 < self.result[1] <= 60:
+            normal = False
             decryption = "свидетельствуют о выраженности вышеуказанных тенденций, о нонкомформистских установках испытуемого, о его склонности противопоставлять собственные нормы и ценности групповым, о тенденции «нарушать спокойствие», искать трудности, которые можно было бы преодолеть."
         if 60 < self.result[1] <= 70:
+            normal = False
             decryption = "свидетельствуют о чрезвычайной выраженности нонконформистских тенденций, проявлении негативизма и заставляют сомневаться в достоверности результатов тестирования по данной шкале."
         return {
             'Scale': 'Шкала склонности к преодолению норм и правил',
             'ScaleValue': self.result[1],
             'RawValue': self.raw_result[1],
-            'Decryption': decryption
+            'Decryption': decryption,
+            'MoreNormal':normal
+
         }
 
     def humanize_third_scale(self):
@@ -77,18 +86,22 @@ class SocialDeviation():
             аддиктивное поведение.
         :return:
         """
+        normal = True
         decryption = ''
         if self.result[2] < 50:
             decryption = "свидетельствуют либо о невыраженности вышеперечисленных тенденций, либо о хорошем социальном контроле поведенческих реакций. "
         if 50 < self.result[2] <= 70:
+            normal = False
             decryption = "свидетельствуют о предрасположенности испытуемого к уходу от реальности посредством изменения своего психического состояния, о склонностях к иллюзорнокомпенсаторному способу решения личностных проблем. Кроме того, эти результаты свидетельствуют об ориентации на чувственную сторону жизни, о наличии «сенсорной жажды», о гедонистически ориентированных нормах и ценностях."
         if self.result[2] > 70:
+            normal = False
             decryption = "свидетельствует о сомнительности результатов либо о наличии выраженной психологической потребности в аддиктивных состояниях, что необходимо выяснять, используя дополнительные психодиагностические средства."
         return {
             'Scale': 'Шкала склонности к аддиктивному поведению',
             'ScaleValue': self.result[2],
             'RawValue': self.raw_result[2],
-            'Decryption': decryption
+            'Decryption': decryption,
+            'MoreNormal': normal
         }
 
     def humanize_fourth_scale(self):
@@ -100,17 +113,21 @@ class SocialDeviation():
         :return:
         """
         decryption = ''
+        normal = True
         if self.result[3] < 50:
             decryption = "свидетельствуют об отсутствии готовности к реализации саморазрушающего поведения, об отсутствии тенденции к соматизации тревоги, отсутствии склонности к реализации комплексов вины в поведенческих реакциях."
         if 50 < self.result[3] <= 70:
+            normal = False
             decryption = "свидетельствуют о низкой ценности собственной жизни, склонности к риску, выраженной потребности в острых ощущениях, о садо-мазохистских тенденциях."
         if self.result[3] > 70:
+            normal = False
             decryption = " свидетельствуют о сомнительной достоверности результатов. "
         return {
             'Scale': 'Шкала склонности к самоповреждающему и саморазрушающему поведению',
             'ScaleValue': self.result[3],
             'RawValue': self.raw_result[3],
-            'Decryption': decryption
+            'Decryption': decryption,
+            'MoreNormal': normal
         }
 
     def humanize_fifth_scale(self):
@@ -121,12 +138,15 @@ class SocialDeviation():
             реализации агрессивных тенденций в поведении.
         :return:
         """
+        normal = True
         decryption = ''
         if self.result[4] < 50:
             decryption = "Свидетельствуют о невыраженности агрессивных тенденций, о неприемлемости насилия как средства решения проблем, о нетипичности агрессии как способа выхода из фрустрирующей ситуации."
         if 50 < self.result[4] <= 60:
+            normal = False
             decryption = "Свидетельствуют о наличии агрессивных тенденций у испытуемого"
         if 60 < self.result[4] <= 70:
+            normal = False
             decryption = "Свидетельствуют об агрессивной направленности личности во взаимоотношениях с другими людьми, о склонности решать проблемы посредством насилия, о тенденции использовать унижение партнера по общению как средство стабилизации самооценки, о наличии садистических тенденций."
         if self.result[4] > 70:
             decryption = "Свидетельствуют о сомнительной достоверности результатов. "
@@ -134,7 +154,8 @@ class SocialDeviation():
             'Scale': 'Шкала склонности к агрессии и насилию',
             'ScaleValue': self.result[4],
             'RawValue': self.raw_result[4],
-            'Decryption': decryption
+            'Decryption': decryption,
+            'MoreNormal': normal
         }
 
     def humanize_sixth_scale(self):
@@ -145,19 +166,22 @@ class SocialDeviation():
             контролировать поведенческие проявления эмоциональных реакций
         :return:
         """
+        normal = True
         decryption = ''
         if self.result[5] <= 50:
             decryption = "Свидетельствуют о невыраженности этих тенденций, о жестком самоконтроле любых поведенческих эмоциональных реакций, чувственных влечений"
         if 60 < self.result[5] <= 70:
+            normal = False
             decryption = "свидетельствует о слабости волевого контроля эмоциональной сферы, о нежелании или неспособности контролировать поведенческие проявления эмоциональных реакций"
         if self.result[5] > 70:
+            normal = False
             decryption = "свидетельствует о отсутсвии волевого контроля эмоциональной сферы, о нежелании или неспособности контролировать поведенческие проявления эмоциональных реакций"
-
         return {
             'Scale': 'Шкала волевого контроля эмоциональных реакций',
             'ScaleValue': self.result[5],
             'RawValue': self.raw_result[5],
-            'Decryption': decryption
+            'Decryption': decryption,
+            'MoreNormal': normal
         }
 
     def humanize_seventh_scale(self):
@@ -176,17 +200,21 @@ class SocialDeviation():
         :return:
         """
         decryption = ''
+        normal = True
         if self.result[6] <= 50:
             decryption = "Говорят о невыражености указанных тенденций, что в сочетании с высокими показателями по шкале социальной желательности может свидетельствовать о высоком уровне социального контроля."
         if self.result[6] > 60:
+            normal = False
             decryption = "Cвидетельствуют о высокой готовности к реализации деликвентного поведения. "
         if 50 <= self.result[6] <= 60:
+            normal = False
             decryption = "Cвидетельствуют о наличии деликвентных тенденций у испытуемого и о низком уровне социального контроля."
         return {
             'Scale': 'Шкала склонности к деликвентному поведению',
             'ScaleValue': self.result[6],
             'RawValue': self.raw_result[6],
-            'Decryption': decryption
+            'Decryption': decryption,
+            'MoreNormal': normal
         }
 
     def humanize_result(self):
